@@ -39,7 +39,7 @@ public class SqlService {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(MOCK_DATA))) {
             String nextLine;
             logger.info("   Reading CSV file for PersonSql Model");
-            String headerLine = bufferedReader.readLine(); // removes title line from file
+            bufferedReader.readLine(); // removes title line from file
             while ((nextLine = bufferedReader.readLine()) != null) {
                 String[] personRecord = nextLine.split(",");
                 PersonSql personSql = new PersonSql(
@@ -88,15 +88,6 @@ public class SqlService {
     public void saveToNoSql() {
         personNoSqlRepo.saveAll(personNoSqlList);
         logger.info("   List of PersonNoSql saved to NoSQL DB");
-    }
-
-
-    public List<PersonSql> getPersonSqlList() {
-        return personSqlList;
-    }
-
-    public List<PersonNoSql> getPersonNoSqlList() {
-        return personNoSqlList;
     }
 
     @TimeCountAnnotation
