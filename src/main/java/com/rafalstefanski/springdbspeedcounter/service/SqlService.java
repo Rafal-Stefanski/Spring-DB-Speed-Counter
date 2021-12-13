@@ -8,6 +8,7 @@ import com.rafalstefanski.springdbspeedcounter.repository.PersonSqlRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -19,7 +20,9 @@ import java.util.List;
 @Service
 public class SqlService {
 
-    private static final String MOCK_DATA = "src/main/resources/MOCK_DATA.csv";
+    @Value("${sql-service.mock-data}")
+    private static String mockData;
+
     private final List<PersonSql> personSqlList;
     private final List<PersonNoSql> personNoSqlList;
     private final PersonSqlRepo personSqlRepo;
@@ -36,7 +39,7 @@ public class SqlService {
 
     @TimeCountAnnotation
     public void readCsvForSql() {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(MOCK_DATA))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(mockData))) {
             String nextLine;
             logger.info("   Reading CSV file for PersonSql Model");
             bufferedReader.readLine(); // removes title line from file
@@ -59,7 +62,7 @@ public class SqlService {
     @TimeCountAnnotation
     public void readCsvForNoSql() {
         logger.info("   Reading CSV file for PersonNoSql Model");
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader((MOCK_DATA)))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader((mockData)))) {
             String nextLine;
             bufferedReader.readLine(); // removes title line from file
             while ((nextLine = bufferedReader.readLine()) != null) {
