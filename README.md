@@ -1,4 +1,5 @@
 ## Spring DataBase Speed Counter :stopwatch:
+<img align="right" src="https://badges.pufler.dev/visits/Rafal-Stefanski/Spring-DB-Speed-Counter">
 ##### Used:
 - MySQL, Hibernate, MongoDB, 
 - AOP for time measure, 
